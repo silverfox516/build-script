@@ -1,0 +1,17 @@
+DESC="fetch uboot/kernel toolchains"
+
+U_ARM="gcc-arm-none-eabi-6-2017-q2-update"
+U_AARCH64="gcc-linaro-aarch64-none-elf-4.8-2013.11_linux"
+K_ARM="gcc-linaro-6.3.1-2017.02-x86_64_arm-linux-gnueabihf"
+K_AARCH64="gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu"
+
+URL_U_ARM="https://developer.arm.com/-/media/Files/downloads/gnu-rm/6-2017q2/${U_ARM}-linux.tar.bz2"
+URL_U_AARCH64="https://releases.linaro.org/archive/13.11/components/toolchain/binaries/${U_AARCH64}.tar.bz2"
+URL_K_ARM="https://releases.linaro.org/components/toolchain/binaries/6.3-2017.02/arm-linux-gnueabihf/${K_ARM}.tar.xz"
+URL_K_AARCH64="https://releases.linaro.org/components/toolchain/binaries/6.3-2017.02/aarch64-linux-gnu/${K_AARCH64}.tar.xz"
+
+COMMANDS[0]="(bs_is_dir /opt/toolchains) || sudo mkdir /opt/toolchains"
+COMMANDS[1]="(bs_is_dir /opt/toolchains/${U_ARM}) || curl -L ${URL_U_ARM} | sudo tar xjf - -C /opt/toolchains"
+COMMANDS[2]="(bs_is_dir /opt/toolchains/${U_AARCH64}) || curl -L ${URL_U_AARCH64} | sudo tar xjf - -C /opt/toolchains"
+COMMANDS[3]="(bs_is_dir /opt/toolchains/${K_ARM}) || curl -L ${URL_K_ARM} | sudo tar xvJf - -C /opt/toolchains"
+COMMANDS[4]="(bs_is_dir /opt/toolchains/${K_AARCH64}) || curl -L ${URL_K_AARCH64} | sudo tar xvJf - -C /opt/toolchains"

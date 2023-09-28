@@ -15,7 +15,7 @@ function bs_wrapper()
         return
     fi
 
-    $@
+    eval "$@"
     if [ $? -eq 0 ]; then return; fi
 
     bs_fatal "failed $@"
@@ -33,6 +33,11 @@ function bs_is_declared()
     local res=$(declare -p $1 2>&1)
     if [[ "$res" != *"not found"* ]]; then return 0;  fi
     return 1
+}
+
+function bs_is_dir()
+{
+    [[ -d $1 ]]
 }
 
 function bs_pick_item_in_array()

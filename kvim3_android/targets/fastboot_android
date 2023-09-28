@@ -1,0 +1,11 @@
+DESC="fastboot android"
+
+COMMANDS[0]="${BS_PRJ}_envsetup"
+COMMANDS[1]="fastboot flash boot \${ANDROID_PRODUCT_OUT}/boot.img"
+COMMANDS[2]="fastboot flash super \${ANDROID_PRODUCT_OUT}/super.img"
+COMMANDS[3]="fastboot flash cache \${ANDROID_PRODUCT_OUT}/cache.img"
+COMMANDS[4]="fastboot flash userdata \${ANDROID_PRODUCT_OUT}/userdata.img"
+COMMANDS[5]="fastboot flash recovery \${ANDROID_PRODUCT_OUT}/recovery.img"
+COMMANDS[6]="fastboot flash dtbo \${ANDROID_PRODUCT_OUT}/dtbo-unsigned.img"
+COMMANDS[7]="fastboot reboot"
+

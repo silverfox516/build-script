@@ -1,0 +1,7 @@
+DESC="fetch khadas android pie"
+
+COMMANDS[0]="echo ${COLORS[lightred]}going to fetch current directory in 7 sec...; sleep 7${COLORS[nc]}"
+COMMANDS[1]="repo init -u https://github.com/khadas/android_manifest.git -b khadas-vim3-p-64bit"
+COMMANDS[2]="repo sync ${BS_JOBS}"
+COMMANDS[3]="cd device/khadas/ && git lfs pull && cd -"
+COMMANDS[4]="repo start khadas-vim3-p-64bit --all"

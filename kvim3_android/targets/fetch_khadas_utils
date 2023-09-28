@@ -1,0 +1,8 @@
+DESC="install khadas utils for burning update.img"
+
+COMMANDS[0]="${BS_PRJ}_envsetup"
+COMMANDS[1]="cd \${ANDROID_BUILD_TOP}/vendor/amlogic"
+COMMANDS[2]="git clone https://github.com/khadas/utils"
+COMMANDS[3]="cd utils"
+COMMANDS[4]="./INSTALL"
+COMMANDS[5]="cd \${ANDROID_BUILD_TOP}"

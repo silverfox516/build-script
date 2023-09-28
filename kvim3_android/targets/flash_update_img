@@ -1,0 +1,4 @@
+DESC="flash update.img"
+
+COMMANDS[0]="${BS_PRJ}_envsetup"
+COMMANDS[1]="aml-burn-tool -b VIM3 -i \${ANDROID_PRODUCT_OUT}/update.img"

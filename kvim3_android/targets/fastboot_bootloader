@@ -1,0 +1,7 @@
+DESC="fastboot bootloader"
+
+COMMANDS[0]="${BS_PRJ}_envsetup"
+COMMANDS[1]="fastboot oem format"
+COMMANDS[2]="fastboot flash bootloader \${ANDROID_BUILD_TOP}/bootloader/uboot/build/u-boot.bin"
+COMMANDS[3]="fastboot erase bootenv"
+COMMANDS[4]="fastboot reboot bootloader"

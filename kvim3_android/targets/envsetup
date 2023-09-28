@@ -1,0 +1,7 @@
+DESC="source envsetup.sh and lunch"
+
+REQUIRED_VAR=ANDROID_TARGET
+
+COMMANDS[0]="(bs_is_declared ANDROID_BUILD_TOP) && return"
+COMMANDS[1]="source build/envsetup.sh"
+COMMANDS[2]="lunch ${ANDROID_TARGET}"

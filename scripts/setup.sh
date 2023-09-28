@@ -54,10 +54,13 @@ function bs_parse_targets() {
         # generate target function
         local str_func="function ${BS_PRJ}_${target}() {"
         for key in ${!COMMANDS[@]}; do
-            str_func="${str_func} bs_wrapper ${COMMANDS[$key]};"
+            str_func="${str_func} echo -e \"${COLORS[lightcyan]}run${COLORS[nc]} ${COMMANDS[$key]}\";"
+            str_func="${str_func} ${COMMANDS[$key]};"
         done
         str_func="${str_func} }"
-        bs_wrapper eval ${str_func}
+
+        eval ${str_func}
+        [ "${DEBUG}" == "true" ] && echo ${str_func}
 
         # set description for usage
         targets_info[${BS_PRJ}_${target}]=${DESC}
