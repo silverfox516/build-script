@@ -1,4 +1,4 @@
 DESC="build android"
 
 COMMANDS[0]="${BS_PRJ}_envsetup"
-COMMANDS[1]="PATH=/opt/toolchains/gcc-linaro-6.3.1-2017.02-x86_64_arm-linux-gnueabihf/bin:/opt/toolchains/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin:${PATH} make -C \${ANDROID_BUILD_TOP} ${BS_JOBS}"
+COMMANDS[1]="PATH=/opt/toolchains/gcc-linaro-6.3.1-2017.02-x86_64_arm-linux-gnueabihf/bin:/opt/toolchains/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin:\${PATH} make -C \${ANDROID_BUILD_TOP} ${BS_JOBS}"

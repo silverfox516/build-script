@@ -2,5 +2,5 @@ DESC="build uboot"
 
 COMMANDS[0]="${BS_PRJ}_envsetup"
 COMMANDS[1]="cd \${ANDROID_BUILD_TOP}/bootloader/uboot"
-COMMANDS[2]="PATH=/opt/toolchains/gcc-arm-none-eabi-6-2017-q2-update/bin:/opt/toolchains/gcc-linaro-aarch64-none-elf-4.8-2013.11_linux/bin:${PATH} ./mk kvim3"
+COMMANDS[2]="PATH=/opt/toolchains/gcc-arm-none-eabi-6-2017-q2-update/bin:/opt/toolchains/gcc-linaro-aarch64-none-elf-4.8-2013.11_linux/bin:\${PATH} ./mk kvim3"
 COMMANDS[3]="cd -"
