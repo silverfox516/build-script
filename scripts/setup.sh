@@ -6,38 +6,7 @@ source ${BS_DIR}/scripts/tools.sh
 # for usage
 declare -A targets_info
 
-# $1 - variable name to set model variable list
-# $2 - model name
-function bs_parse_model_vars()
-{
-    local -n var_list=$1
-    local -n model=$2
-
-    var_list=""
-
-    while read line; do
-        if [[ ${line} != *"="* ]]; then continue; fi
-
-        local key=$(echo ${line} | cut -d"=" -f 1)
-        local value=$(echo ${line} | cut -d"=" -f 2)
-
-        var_list="${var_list} $key"
-        eval ${key}=${value}
-    done < ${BS_DIR_MODELS}/${model}
-}
-
-# $1 - variable including model variables
-function bs_menu_of_array_vars()
-{
-    local -n var_list=$1
-
-    for var in ${var_list}; do
-        if ! bs_is_array ${var}; then continue; fi
-
-        bs_print_menu ${var}
-    done
-}
-
+# parse target description and generate a function runs commands in target
 function bs_parse_targets() {
     local target_files=(`ls ${BS_DIR_TARGETS}`)
 
@@ -55,7 +24,7 @@ function bs_parse_targets() {
         local str_func="function ${BS_PRJ}_${target}() {"
         for key in ${!COMMANDS[@]}; do
             str_func="${str_func} echo -e \"${COLORS[lightcyan]}run${COLORS[nc]} ${COMMANDS[$key]}\";"
-            str_func="${str_func} ${COMMANDS[$key]};"
+            str_func="${str_func} if [ '${DEBUG}' != "true" ]; then ${COMMANDS[$key]}; fi;"
         done
         str_func="${str_func} }"
 
@@ -79,9 +48,13 @@ function bs_usage() {
     done
 }
 
-MODELS=(`ls ${BS_DIR_MODELS}`)
-bs_print_menu MODELS
-bs_parse_model_vars MODEL_VARS MODELS
-bs_menu_of_array_vars MODEL_VARS
+MODELS=(`ls $BS_DIR_MODELS`)
+bs_select_one_from_array MODELS
+
+MODEL_PATH=$BS_DIR_MODELS/$MODELS
+if [ ! -f "$MODEL_PATH" ]; then bs_fatal "not exist $MODEL_PATH"; fi
+
+bs_parse_vars_in_file MODEL_VARS MODEL_PATH
+bs_select_one_from_each_array_in_list MODEL_VARS
 bs_parse_targets
 bs_usage
